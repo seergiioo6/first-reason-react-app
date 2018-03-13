@@ -1,0 +1,28 @@
+{
+  "name": "first-reason-react-app",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "bsb -make-world && webpack",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "webpack": "webpack -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@glennsl/bs-json": "^1.1.2",
+    "bs-fetch": "^0.2.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "reason-react": "^0.3.4",
+  },
+  "devDependencies": {
+    "bs-platform": "^2.2.2",
+    "concurrently": "^3.5.0",
+    "webpack": "^1.14.0"
+  }
+}

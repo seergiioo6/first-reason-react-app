@@ -5,4 +5,4 @@ npm i
 npm run build
 ```
 
-Open index.html
+Open index.html (No server needed)

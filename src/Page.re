@@ -25,7 +25,9 @@ let make = (~message, _children) => {
   render: self => {
     let counterMessage: string = "you have clicked "++ string_of_int(self.state.count) ++ " times.";
     <div>
-      <h1>(ReasonReact.stringToElement(message))</h1>
+      <h1 style=(
+        ReactDOMRe.Style.make(~color="#444444", ~fontSize="40px", ())
+      )>(ReasonReact.stringToElement(message))</h1>
       <button onClick=(_event => self.send(Click))> (ReasonReact.stringToElement("Counter + 1")) </button>
       <button onClick=(_event => self.send(Switch))> (ReasonReact.stringToElement("Hide/Show Counter")) </button>
       <button onClick=(_event => self.send(AddTodo))> (ReasonReact.stringToElement("Add Todo")) </button>

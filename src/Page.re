@@ -1,9 +1,7 @@
-type todo = string;
-
 type state = {
   count: int,
   visible: bool,
-  todos: list(todo)
+  todos: list(TodoItem.todo)
 };
 
 type action =
@@ -38,7 +36,7 @@ let make = (~message, _children) => {
        <ul>
        (
           ReasonReact.arrayToElement(Array.of_list(
-              List.map((item) => { <li>(ReasonReact.stringToElement(item))</li> }, self.state.todos)
+              List.map((item) =>  <TodoItem todo="tete"/> , self.state.todos)
           ))
         )
         </ul>

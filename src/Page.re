@@ -4,6 +4,8 @@ type state = {
   todos: list(TodoItem.todo)
 };
 
+let initialTodo: TodoItem.todo = {id: 0, title: "Todo Item"};
+
 type action =
   | Click
   | Switch
@@ -13,12 +15,12 @@ let component = ReasonReact.reducerComponent("Page");
 
 let make = (~message, _children) => {
   ...component,
-  initialState: () => {count: 0, visible: true, todos: ["first todo"]},
+  initialState: () => {count: 0, visible: true, todos: [initialTodo]},
   reducer: (action, state) =>
     switch (action) {
     | Click => ReasonReact.Update({...state, count: state.count + 1})
     | Switch => ReasonReact.Update({...state, visible: !state.visible})
-    | AddTodo => ReasonReact.Update({...state, todos: ["Todo", ...state.todos]});
+    | AddTodo => ReasonReact.Update({...state, todos: [{title: "Todo", id: int_of_float(Js.Date.now())}, ...state.todos]});
     },
   render: self => {
     let counterMessage: string = "you have clicked "++ string_of_int(self.state.count) ++ " times.";
@@ -36,7 +38,7 @@ let make = (~message, _children) => {
        <ul>
        (
           ReasonReact.arrayToElement(Array.of_list(
-              List.map((item) =>  <TodoItem todo="tete"/> , self.state.todos)
+              List.map((todo) => <TodoItem todo/> , self.state.todos)
           ))
         )
         </ul>

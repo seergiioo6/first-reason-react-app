@@ -1,7 +1,11 @@
-type todo = string;
+type todo = {
+  id: int,
+  title: string
+};
 
 type state = {
-  title: string,
+  editing: bool,
+  text: string
 };
 
 type action =
@@ -14,12 +18,17 @@ let make = (~todo, _children) => {
   reducer: action =>
       switch (action) {
       | Edit => (
-          state => ReasonReact.Update({...state, title: "test"});
+          state => ReasonReact.Update({...state, editing: true, text: "clicked!"})
         )
       },
-  initialState: () => {title: "test"},
+  initialState: () => {
+    editing: false,
+    text: todo.title
+  },
   render: self => {
-    <li onClick=(_event => self.send(Edit))>(ReasonReact.stringToElement(todo))</li>
+    <li onClick=(_event => self.send(Edit))>
+      (ReasonReact.stringToElement(self.state.text))
+    </li>
   }
 
 };

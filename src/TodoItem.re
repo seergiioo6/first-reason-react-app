@@ -1,6 +1,9 @@
+type completed = bool;
+
 type todo = {
   id: int,
-  title: string
+  title: string,
+  completed: completed
 };
 
 type state = {

@@ -4,7 +4,7 @@ type state = {
   todos: list(TodoItem.todo)
 };
 
-let initialTodo: TodoItem.todo = {id: 0, title: "Todo Item"};
+let initialTodo: TodoItem.todo = {id: 0, title: "Todo Item", completed: false};
 
 type action =
   | Click
@@ -20,7 +20,18 @@ let make = (~message, _children) => {
     switch (action) {
     | Click => ReasonReact.Update({...state, count: state.count + 1})
     | Switch => ReasonReact.Update({...state, visible: !state.visible})
-    | AddTodo => ReasonReact.Update({...state, todos: [{title: "Todo", id: int_of_float(Js.Date.now())}, ...state.todos]});
+    | AddTodo => ReasonReact.Update(
+      {...state,
+        todos: [
+          {
+            title: "Todo",
+            id: int_of_float(Js.Date.now()),
+            completed: false
+          },
+          ...state.todos
+        ]
+      }
+    );
     },
   render: self => {
     let counterMessage: string = "you have clicked "++ string_of_int(self.state.count) ++ " times.";

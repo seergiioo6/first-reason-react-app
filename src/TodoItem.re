@@ -8,12 +8,14 @@ type todo = {
 
 type state = {
   editing: bool,
-  text: string
+  text: string,
+  completed: completed
 };
 
 type action =
   | Edit
-  | Update(string);
+  | Update(string)
+  | Complete;
 
 let component = ReasonReact.reducerComponent("TodoItem");
 
@@ -27,10 +29,14 @@ let make = (~todo, _children) => {
       | Update(text) => (
           state => ReasonReact.Update({...state, text: text})
         )
+      | Complete => (
+          state => ReasonReact.Update({...state, completed: true})
+        )
       },
   initialState: () => {
     editing: false,
-    text: todo.title
+    text: todo.title,
+    completed: false
   },
   render: self =>
     switch (self.state.editing) {
@@ -44,6 +50,7 @@ let make = (~todo, _children) => {
                   onChange=(_event => self.send(Update(ReactDOMRe.domElementToObj(ReactEventRe.Form.target(_event))##value)))
                 />
                 <button onClick=(_event => self.send(Edit))> (ReasonReact.stringToElement("Guardar")) </button>
+                <button onClick=(_event => self.send(Complete))> (ReasonReact.stringToElement("Completar")) </button>
               </div>
     }
 

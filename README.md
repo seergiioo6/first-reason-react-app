@@ -4,5 +4,3 @@ cd first-reason-react-app
 npm i
 npm run build
 ```
-
-Open index.html (No server needed)
